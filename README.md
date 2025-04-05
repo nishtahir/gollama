@@ -14,16 +14,17 @@ This utility provides a simple tool for managing Ollama Models stored in a [Goog
 
 Clone the repository.
 
-````bash
+```bash
 git clone https://github.com/nishtahir/gollama.git
 cd gollama
+```
 
 Create a virtual environment.
 
 ```bash
 python -m venv .venv
 source .venv/bin/activate
-````
+```
 
 Install uv and sync the dependencies.
 
@@ -35,7 +36,6 @@ uv sync
 ## Usage
 
 ```
-
  Usage: gollama [OPTIONS] COMMAND [ARGS]...
 
 ╭─ Options ──────────────────────────────────────────────────────────────────╮
@@ -49,7 +49,6 @@ uv sync
 │ list   List models in a storage bucket                                     │
 │ pull   Pull a model from a storage bucket                                  │
 ╰────────────────────────────────────────────────────────────────────────────╯
-
 ```
 
 ### Push a model to a storage bucket
@@ -68,6 +67,12 @@ gollama list
 
 ```bash
 gollama pull <model>
+```
+
+### Remove a model from a storage bucket
+
+```bash
+gollama rm <model>
 ```
 
 ## Authentication

@@ -20,9 +20,13 @@ class OllamaManifest:
         return blobs
 
     @staticmethod
+    def from_str(content: str) -> "OllamaManifest":
+        return OllamaManifest(json.loads(content))
+
+    @staticmethod
     def from_path(path: str) -> "OllamaManifest":
         with open(path, "r") as f:
-            return OllamaManifest(json.load(f))
+            return OllamaManifest.from_str(f.read())
 
 
 class OllamaModel:

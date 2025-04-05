@@ -63,7 +63,6 @@ def pull(
     manifests_dir = os.path.join("models", "manifests")
     blobs_dir = os.path.join("models", "blobs")
 
-    # check if the model exists in the bucket
     ollama_model = OllamaModel.from_name(model)
     manifest_path = os.path.join(manifests_dir, ollama_model.name, ollama_model.version)
     abs_manifest_path = os.path.join(ollama_home, manifest_path)
@@ -80,6 +79,32 @@ def pull(
         blob_path = os.path.join(blobs_dir, blob_name)
         abs_blob_path = os.path.join(ollama_home, blob_path)
         gcloud.download_blob(bucket_name, blob_path, abs_blob_path)
+
+
+@app.command("rm", help="Remove a model from a storage bucket")
+def rm(
+    *,
+    model: Annotated[str, typer.Argument(help="Model to remove")],
+    bucket_name: Annotated[str, typer.Option(envvar="GCS_BUCKET_NAME")],
+    ollama_home: Annotated[str, typer.Option(envvar="OLLAMA_HOME")] = "~/.ollama",
+):
+    ollama_home = os.path.expanduser(ollama_home)
+    manifests_dir = os.path.join("models", "manifests")
+    blobs_dir = os.path.join("models", "blobs")
+
+    ollama_model = OllamaModel.from_name(model)
+    manifest_path = os.path.join(manifests_dir, ollama_model.name, ollama_model.version)
+    manifest_content = gcloud.read_blob(bucket_name, manifest_path)
+    manifest = OllamaManifest.from_str(manifest_content)
+
+    blobs = manifest.blobs()
+    for blob in blobs:
+        blob_name = blob.replace(":", "-")
+        blob_path = os.path.join(blobs_dir, blob_name)
+        gcloud.delete_blob(bucket_name, blob_path)
+
+    gcloud.delete_blob(bucket_name, manifest_path)
+    print(f"deleted '{model}'")
 
 
 if __name__ == "__main__":
