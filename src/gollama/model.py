@@ -39,11 +39,17 @@ class OllamaModel:
             model_name = f"{model_name}:latest"
 
         name, version = model_name.split(":")
+        if not _uses_custom_registry(name):
+            # We need to determin if it's from the
+            # ollama model registry. if there's no '/'
+            # then the package is stored in the library
+            # otherwise it's stored in the custom registry
+            if "/" not in name:
+                name = f"library/{name}"
 
-        # we assume that model names with no slashes are
-        # pulled from the ollama model registry
-        if "/" not in name:
-            name = f"registry.ollama.ai/library/{name}"
+            # now we can construct the fully qualified name
+            # using the ollama model registry prefix
+            name = f"registry.ollama.ai/{name}"
 
         return OllamaModel(name=name, version=version)
 
@@ -53,3 +59,23 @@ class OllamaModel:
         name = path.split("/")[-2]
         version = path.split("/")[-1]
         return OllamaModel(name=name, version=version)
+
+
+def _uses_custom_registry(image_name: str) -> bool:
+    # We're borrowing some logic from docker to determine if the
+    # image is from a custom registry. My understanding is that
+    # docker assumes an image is from a custom registry if the
+    # segment before the first '/' contains a '.' (dot), a ':' (colon),
+    # or equals "localhost". Otherwise, it defaults to Docker Hub.
+    parts = image_name.split("/", 1)
+
+    if len(parts) == 1:
+        return False
+
+    registry_candidate = parts[0]
+
+    return (
+        ("." in registry_candidate)
+        or (":" in registry_candidate)
+        or (registry_candidate == "localhost")
+    )

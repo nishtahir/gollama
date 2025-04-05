@@ -48,7 +48,7 @@
       version='12b',
     ),
     OllamaModel(
-      name='microsoft/phi-4',
+      name='registry.ollama.ai/microsoft/phi-4',
       version='latest',
     ),
     OllamaModel(
