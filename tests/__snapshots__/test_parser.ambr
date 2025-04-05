@@ -1,0 +1,75 @@
+# serializer version: 1
+# name: test_parse_ollama_manifest_blobs
+  list([
+    'sha256:d8e5f6443e0ba6195753078b44cf8dfafe46c89109208ca28835591afdc8c36f',
+    'sha256:de3ceb05eea4beeb69e7819c35003039c4439117c4cf44e31d736a2806662bbb',
+    'sha256:e3b2721cec511e3a627ae0993753abbf5c72cdf4cfcdbc8f5c33ce15c4c4e04b',
+    'sha256:f02dd72bb2423204352eabc5637b44d79d17f109fdb510a7c51455892aa2d216',
+  ])
+# ---
+# name: test_parse_ollama_manifest_from_path
+  OllamaManifest(
+    json=dict({
+      'config': dict({
+        'digest': 'sha256:d8e5f6443e0ba6195753078b44cf8dfafe46c89109208ca28835591afdc8c36f',
+        'mediaType': 'application/vnd.docker.container.image.v1+json',
+        'size': 412,
+      }),
+      'layers': list([
+        dict({
+          'digest': 'sha256:de3ceb05eea4beeb69e7819c35003039c4439117c4cf44e31d736a2806662bbb',
+          'mediaType': 'application/vnd.ollama.image.model',
+          'size': 9053114240,
+        }),
+        dict({
+          'digest': 'sha256:e3b2721cec511e3a627ae0993753abbf5c72cdf4cfcdbc8f5c33ce15c4c4e04b',
+          'mediaType': 'application/vnd.ollama.image.template',
+          'size': 102,
+        }),
+        dict({
+          'digest': 'sha256:f02dd72bb2423204352eabc5637b44d79d17f109fdb510a7c51455892aa2d216',
+          'mediaType': 'application/vnd.ollama.image.params',
+          'size': 59,
+        }),
+      ]),
+      'mediaType': 'application/vnd.docker.distribution.manifest.v2+json',
+      'schemaVersion': 2,
+    }),
+  )
+# ---
+# name: test_parse_ollama_model_from_name
+  list([
+    OllamaModel(
+      name='registry.ollama.ai/library/gemma3',
+      version='latest',
+    ),
+    OllamaModel(
+      name='registry.ollama.ai/library/gemma3',
+      version='12b',
+    ),
+    OllamaModel(
+      name='microsoft/phi-4',
+      version='latest',
+    ),
+    OllamaModel(
+      name='registry.ollama.ai/library/gemma3',
+      version='4b',
+    ),
+    OllamaModel(
+      name='hf.co/lmstudio-community/zeta-GGUF',
+      version='Q4_K_M',
+    ),
+    OllamaModel(
+      name='registry.ollama.ai/library/llama3.1',
+      version='8b',
+    ),
+    OllamaModel(
+      name='registry.ollama.ai/library/qwen2.5-coder',
+      version='1.5b-base',
+    ),
+    OllamaModel(
+      name='registry.ollama.ai/library/nomic-embed-text',
+      version='latest',
+    ),
+  ])
+# ---

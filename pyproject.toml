@@ -1,0 +1,55 @@
+[build-system]
+build-backend = "hatchling.build"
+requires = ["hatchling"]
+
+[dependency-groups]
+dev = [
+  "pytest>=8.3.5",
+  "syrupy>=4.9.1",
+]
+
+[project]
+authors = [
+  {email = "nishtahir@outlook.com", name = "Nish Tahir"},
+]
+dependencies = [
+  "google-cloud-storage>=3.1.0",
+  "pyright>=1.1.398",
+  "python-dotenv>=1.1.0",
+  "ruff>=0.11.4",
+  "toml-sort>=0.24.2",
+  "tqdm>=4.67.1",
+  "typer>=0.15.2",
+]
+description = "Utility for managing Ollama models in Google Cloud Storage"
+name = "gollama"
+readme = "README.md"
+requires-python = ">=3.11"
+version = "0.1.0"
+
+[project.scripts]
+gollama = "gollama.__main__:app"
+
+[tool.pyright]
+ignore = ["notebooks"]
+pythonVersion = "3.11"
+reportPrivateImportUsage = false
+typeCheckingMode = "basic"
+useLibraryCodeForTypes = true
+venv = ".venv"
+venvPath = "."
+
+[tool.ruff]
+exclude = [".venv", "typings"]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.format]
+exclude = ["*.pyi"]
+skip-magic-trailing-comma = false
+
+[tool.tomlsort]
+all = true
+in_place = true
+sort_first = ["tool.poetry"]
+trailing_comma_inline_array = true
