@@ -99,35 +99,35 @@ version = "0.1.0"
 source = { editable = "." }
 dependencies = [
     { name = "google-cloud-storage" },
-    { name = "pyright" },
     { name = "python-dotenv" },
-    { name = "ruff" },
-    { name = "toml-sort" },
     { name = "tqdm" },
     { name = "typer" },
 ]
 
 [package.dev-dependencies]
 dev = [
+    { name = "pyright" },
     { name = "pytest" },
+    { name = "ruff" },
     { name = "syrupy" },
+    { name = "toml-sort" },
 ]
 
 [package.metadata]
 requires-dist = [
-    { name = "google-cloud-storage", specifier = ">=3.1.0" },
-    { name = "pyright", specifier = ">=1.1.398" },
-    { name = "python-dotenv", specifier = ">=1.1.0" },
-    { name = "ruff", specifier = ">=0.11.4" },
-    { name = "toml-sort", specifier = ">=0.24.2" },
+    { name = "google-cloud-storage", specifier = ">=2.19.0" },
+    { name = "python-dotenv", specifier = ">=1.0.1" },
     { name = "tqdm", specifier = ">=4.67.1" },
     { name = "typer", specifier = ">=0.15.2" },
 ]
 
 [package.metadata.requires-dev]
 dev = [
+    { name = "pyright", specifier = ">=1.1.398" },
     { name = "pytest", specifier = ">=8.3.5" },
+    { name = "ruff", specifier = ">=0.11.4" },
     { name = "syrupy", specifier = ">=4.9.1" },
+    { name = "toml-sort", specifier = ">=0.24.2" },
 ]
 
 [[package]]

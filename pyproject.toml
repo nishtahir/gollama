@@ -4,8 +4,11 @@ requires = ["hatchling"]
 
 [dependency-groups]
 dev = [
+  "pyright>=1.1.398",
   "pytest>=8.3.5",
+  "ruff>=0.11.4",
   "syrupy>=4.9.1",
+  "toml-sort>=0.24.2",
 ]
 
 [project]
@@ -13,11 +16,8 @@ authors = [
   {email = "nishtahir@outlook.com", name = "Nish Tahir"},
 ]
 dependencies = [
-  "google-cloud-storage>=3.1.0",
-  "pyright>=1.1.398",
-  "python-dotenv>=1.1.0",
-  "ruff>=0.11.4",
-  "toml-sort>=0.24.2",
+  "google-cloud-storage>=2.19.0",
+  "python-dotenv>=1.0.1",
   "tqdm>=4.67.1",
   "typer>=0.15.2",
 ]
@@ -25,7 +25,7 @@ description = "Utility for managing Ollama models in Google Cloud Storage"
 name = "gollama"
 readme = "README.md"
 requires-python = ">=3.11"
-version = "0.1.0"
+version = "0.1.1"
 
 [project.scripts]
 gollama = "gollama.__main__:app"
