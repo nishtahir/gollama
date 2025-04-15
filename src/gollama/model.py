@@ -1,8 +1,9 @@
 import json
+from typing import Any
 
 
 class OllamaManifest:
-    def __init__(self, json: dict):
+    def __init__(self, json: dict[str, Any]):
         self.json = json
 
     def config(self) -> dict:

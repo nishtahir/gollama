@@ -1,10 +1,12 @@
 import os
 
+from syrupy.assertion import SnapshotAssertion
+
 from gollama.model import OllamaManifest, OllamaModel
 from gollama.utils import __PROJECT_ROOT__
 
 
-def test_parse_ollama_model_from_name(snapshot):
+def test_parse_ollama_model_from_name(snapshot: SnapshotAssertion):
     names = [
         "gemma3",
         "gemma3:12b",
@@ -20,7 +22,7 @@ def test_parse_ollama_model_from_name(snapshot):
     snapshot.assert_match(models)
 
 
-def test_parse_ollama_manifest_from_path(snapshot):
+def test_parse_ollama_manifest_from_path(snapshot: SnapshotAssertion):
     manifest = OllamaManifest.from_path(
         os.path.join(
             __PROJECT_ROOT__,
@@ -30,7 +32,7 @@ def test_parse_ollama_manifest_from_path(snapshot):
     snapshot.assert_match(manifest)
 
 
-def test_parse_ollama_manifest_blobs(snapshot):
+def test_parse_ollama_manifest_blobs(snapshot: SnapshotAssertion):
     manifest = OllamaManifest.from_path(
         os.path.join(
             __PROJECT_ROOT__,
