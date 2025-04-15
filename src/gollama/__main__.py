@@ -34,7 +34,7 @@ def push(
     manifest = OllamaManifest.from_path(abs_manifest_path)
 
     print("pushing manifest")
-    gcloud.upload_blob(abs_manifest_path, bucket_name, manifest_path, force=force)
+    gcloud.upload_blob(abs_manifest_path, bucket_name, manifest_path, force=True)
 
     blobs = manifest.blobs()
 
