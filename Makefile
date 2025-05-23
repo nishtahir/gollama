@@ -6,7 +6,7 @@ lint-fix:
 
 .PHONY: test
 test:
-	uv run pytest -vv .
+	uv run --with test pytest -vv .
 
 .PHONY: sync
 sync:
